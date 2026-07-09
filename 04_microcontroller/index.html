@@ -1,120 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<title>PS70: Intro to Digital Fabrication </title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="../style.css" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <title>PS70: Intro to Digital Fabrication</title>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../style.css" rel="stylesheet">
+</head>
 
-<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #130F1D; color: #EEE7E8;">
-  <div style="align-items: center; justify-content: center;" class="container-fluid">
-    <div class="flexrow">
-      <h2 class="nav-title">PS70 // Intro to Digital Fabrication // F23</h2>
-    </div>
-    <div class="navbar-nav">
-      <h4><a class="nav-link" href="../index.html">Home</a></h4>
-      <h4><a class="nav-link" href="../about.html">About</a></h4>
-    </div>
-  </div>
-</nav>
 
 <body>
-<xmp style="display:none;">
-<div class="textcontainer">
-<p class="margin">   </p>
+
+<nav>
+    <div class="container-fluid nav-container">
+        <div class="flexrow">
+            <h2 class="nav-title">PS70: Intro to Digital Fabrication</h2>
+        </div>
+
+        <div class="navbar-links">
+            <a class="nav-link" href="../index.html">Home</a>
+            <a class="nav-link" href="../about.html">About</a>
+            <a class="nav-link" href="../13_finalproject/index.html">Final Project</a>
+        </div>
+    </div>
+</nav>
+
+<div class="textcontainer week-grid page-align">
 
 <h3>Week 4: Microcontroller Programming</h3>
 
-<p class="margin">   </p>
+<p class="margin"></p>
+
 <div class="flexrow">
-  <a id="btn" href="wk4.zip" download>Download my code and CAD files from this week!
-  </a>
+    <a id="btn" href="CAD_files.zip" download>
+        CAD files
+    </a>
+
+    <a id="btn" href="Arduino_files.zip" download style="margin-left: 20px;">
+        Arduino code files
+    </a>
 </div>
-<p class="margin">   </p>
+
+<p class="margin"></p>
 
 <h4>Assignment: Make an Arduino Do Something</h4>
 
-For this week, I wanted to have my Arduino control the movement of my kinetic
-sculpture. First, I had to make some edits to my sculpture so that it would
-actually work. This entailed modifying the gears to attach them to the motor and
-the rest of the sculpture and fabricating a new stand to mount the sculpture on.
+<p>
+After some brainstorming, I realised that a motor, correctly configured, could be used 
+as a clock. Now, given this is a brushed motor, I can't set the speed too low or it won't start,
+nor can I control it's motion in accurate increments, which rules out directly programming the 
+clock behaviour into the motor. If I could control the speed to correspond one rotation with 
+one second though, then I could use that to drive some form of clock without requiring very accurate 
+motion. This is where I then changed the idea to a countdown timer, which would use a potentiometer to 
+set the time, a button to start the motor, and a geneva wheel mechanism, to increment the time by one 
+with every rotation. The lowest potentiometer resistance would be 0 seconds, and the highest would 
+be 60 seconds.
+</p>
 
-<p class="margin">   </p>
-<div class="flexrow">
-  <img src="./newbase.png" alt="a 3D model of a disassembled cardboard stand">
+<p class="margin"></p>
+
+
+<div class="image-row">
+        <img src="Geneva_Disk.png" alt="Geneva wheel CAD design">
+        <img src="CAD_Assembly.png" alt="Assembly CAD design">
+        <img src="Circuit_Diagram.png" alt="Circuit design" style="width: 370px; height: auto;"">
+    </div>
+    <p class="caption">CAD & Circuit Design Process</p>
+
+<p>
+
+As can be seen in the images above, the Geneva wheel design ended up being unconstrained 
+as however hard I tried to fully constrain it, for some reason the draing would break at the 
+point of full definition. Given the amount of time I spent trying to get it to work, eventually
+I decided to just check my measurements and accept a mostly defined sketch. I designed the locking
+wheel that sits on the driving wheel, to have the same radius as the outer curved edge of each arm
+of the Geneva wheel, so they would interact as closely together as possible. 
+</p>
+
+
+<p>
+For the circuit, I modified the dimming LED circuit from the lab, by replacing the LED with the 
+motor, and incorporating a button. The potentiometer, button, and motor are all separately connected
+to the Xiao, each one provides it's own sequential input (Set the time, then press the button, then 
+start the motor).
+</p>
+
+<p class="margin"></p>
+
+<div class="image-row">
+    <img src="./Code.png" alt="Arduino code variables" style="width: 550px; height: auto;">
+    <img src="./Reverse_Code.png" alt="Arduino reversing motor code" style="width: 550px; height: auto;"">
 </div>
-<p class="caption">The re-designed cardboard stand, including notches at the bottom for a shelf to hold the motor.</p>
 
-Once those were printed and assembled, I was able to test the sculpture with my
-motor. I ran into some problems with friction -- at first, I had tightened the
-various axles and hinges of my sculpture too much, so the motor couldn't turn the
-gears at all. Next, the shelf I had made for the motor to sit in was causing friction
-and preventing the motor from turning. Once I fixed both of those problems, I found
-another issue, which was that I was having trouble fixing the center axle to
-the center gear on the far side, so the motor was only turning one side of the
-sculpture. I decided to leave that problem for another day, and focused on getting
-the motor to work with one side of the sculpture. Eventually, I succeeded, although
-I had to hold the motor in place:
+<p class="caption">
+Arduino code variable instantiation & Reversing code
+</p>
 
-<p class="margin">   </p>
-<div class="flexrow">
-  <img src="./panthergif.gif" alt="a cardboard panther that looks like it's running">
+<p>
+To make the motor rotate at 1 revolution per second, I had to modify the PWM constant (Which affects
+the speed). I calculated that on a scale of 1-255 (Minimum to maximum speed), 194 corresponded with 1 RPM.
+However, at 194, the motor did not have enough momentum to start, so with a bit of experimentation I found that
+225 was the lowest PWM value I could set which allowed the motor to start.
+</p>
+
+<p>
+  I also added a function to reverse the motor 2 seconds after the timer had completed, so you could have the timer run a 
+  second time.
+</p>
+
+<div class="image-row">
+    <img src="./User_Interface.png" alt="Arduino code variables">
+    <img src="./Driving_Disk.png" alt="Arduino reversing motor code">
+    <img src="./Dowel_Holder.png" alt="Arduino reversing motor code">
 </div>
-<p class="caption">It lives!</p>
 
-Now I could add in the Arduino part. I hooked up a simple circuit with my Arduino
-Uno, my motor, a motor controller, and a few wires, and wrote a simple program to
-supply power to the motor:
+<p class="caption">
+User interface & Laser cut parts.
+</p>
 
-<pre><code style="background-color: #2d2b33;">
-  const int A1A = 3;  // define pin 3 for A-1A 
-  const int A1B = 5;  // define pin 4 for A-1B 
+<p>
+I assembled the circuit and positioned the potentiometer and button in an easy to reach place for the user. 
+The laser cut parts came out well, however positioning the Geneva wheel close to the driving wheel was very difficult
+and involved a lot of trial and error. Once I found the right location, I crudely put together a slot to hold the Geneva 
+wheel, which worked but because of its crudeness, sometimes during operation the wheel is spun more than once in one 
+driving wheel revolution.
+</p>
 
-  void setup() {
-    pinMode(A1A, OUTPUT);     // specify these pins as outputs
-    pinMode(A1B, OUTPUT);
-    digitalWrite(A1A, LOW);   // start with the motors off 
-    digitalWrite(A1B, LOW);
-  }
+<p>
+Here's a video of the result:
+</p>
 
-  void loop() {
-    // start the motor 
-    digitalWrite(A1A, HIGH);   
-    digitalWrite(A1B, LOW);
-  }
-</code></pre>
+<p class="margin"></p>
 
-I figured out that I had to reverse the direction of the motor to make the panther's
-running motion go the right way, so I flipped pin A1-B to do that and then also
-added some delay functions to create a pattern of motion. Here's a video of the
-result:
+<div class="image-row">
+    <video controls>
+        <source src="./Demo.MOV">
+    </video>
+</div>
 
-<p class="margin">   </p>
-<div class="flexrow">
-  <video controls>
-    <source src="./panther-vid.mov" type="video/mp4">
-  </video>
-  </div>
-<p class="caption">The panther running on a timed delay.</p>
-
-Lastly, I went back and added a potentiometer to my circuit to adjust the speed
-the panther runs at. The motor is still not held in place well, so if I were to
-come back to this design I would rethink the motor housing so it doesn't have to
-be held in place.
-
-<p class="margin">   </p>
-<div class="flexrow">
-  <video controls>
-    <source src="panther_nice.mov" type="video/mp4">
-  </video>
-  </div>
-<p class="caption">The final result (so far).</p>
+<p class="caption">
+Timer running.
+</p>
 
 </div>
-</xmp>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
-
-<script src="../strapdown.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>
 
 </html>
