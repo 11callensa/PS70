@@ -3,12 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PS70: Intro to Digital Fabrication</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../style.css" rel="stylesheet">
 </head>
+
 
 <body>
 
@@ -26,105 +26,65 @@
     </div>
 </nav>
 
-<div class="textcontainer week-grid">
+<div class="textcontainer week-grid page-align">
 
-    <h3 class="page-title">Week 2: 2D Design &amp; Cutting</h3>
+<h3>Week 2: 2D Design</h3>
 
-    <p class="margin"></p>
+<p class="margin"></p>
 
-    <h4 class="page-subheading">Assignment 1: Press-Fit Construction</h4>
+<h4>Assignment 1: Press-Fit Construction</h4>
 
-    <p class="page-writing">
-        See <a href="../03_fabrication/index.html">Week 3 - Electronics</a> to see a combination of this assignment with the kinetic sculpture.
-    </p>
+<p>
+    See <a href="../03_fabrication/index.html">Week 3 - Electronics</a> to see a combination of this assignment with the kinetic sculpture.
+</p>
 
-    <p class="margin"></p>
+<p class="margin"></p>
 
-    <h4 class="page-subheading">Assignment 2: CAD Tutorial</h4>
+<h4>Assignment 2: CAD Tutorial</h4>
 
-    <p class="page-writing">
-        I struggled to install Fusion on my laptop given I no longer have a student email address, so I decided to use Onshape, which I had used years ago during an internship. I spent some time re-familiarising myself with the software and good design principles.
-    </p>
+<p>
+    I struggled to install Fusion on my laptop given I no longer have a student email address, so I decided to use Onshape, which I had used years ago during an internship. I spent some time re-familiarising myself with the software and good design principles.
+</p>
 
-    <p class="margin"></p>
+<p class="margin"></p>
 
-    <h4 class="page-subheading">Assignment 3: Onshape Modeling (TO DO) ====== </h4>
+<h4>Assignment 3: Onshape Modeling </h4>
 
-    <p class="margin"></p>
-
-    <div class="flexrow">
-        <img src="./assembly.png" alt="CAD model of flash drive and nuts">
+<div class="image-row">
+        <img src="Adaptor_front.png" alt="USB adaptor front";>
+        <img src="Adaptor_Rear.png" alt="USB adaptor back";>
     </div>
+    <p class="caption">USB-Hub</p>
 
-    <p class="caption">
-        My final assembly: a tableau of my flash drive and several copies of the metal nut I modeled.
-    </p>
+<p>
+    I decided to model the USB-Hub I use with my laptop, as it uses simple shapes and clear dimensions.
+</p>
 
-    <p class="page-writing">
-        The first item I chose to model was my trusty flash drive. I chose it because it combined simple geometry with more complex features like the circular hook.
-    </p>
-
-    <p class="margin"></p>
-
-    <div class="flexrow">
-        <img src="./drive_params.png" alt="Flash drive parameters">
+<div class="image-row">
+        <img src="Adaptor_footprint.png" alt="Sketched adaptor footprint";>
+        <img src="Adaptor_extrude_1.png" alt="Extruded adaptor footprint";>
     </div>
+    <p class="caption">Body of the USB hub.</p>
 
-    <p class="caption">
-        The parameters for my flash drive. The hook was the tricky part.
-    </p>
+<p>
+    I started with a sketch of the footprint of the USB hub by creating a rectangle with fillets. Given I want to draw the next parts onto the 
+    body, I extruded the sketch to form the body.
+</p>
 
-    <p class="page-writing">
-        I started with a rectangular prism, then used fillets to round the edges. For the hook, I extruded a block, cut a circular hole, and filleted the interior to create a smooth curve.
-    </p>
-
-    <p class="page-writing">
-        I then used the Split Body tool to create seams and added a slight fillet to form the surface detail. Finally, I matched materials and colours to the real object.
-    </p>
-
-    <p class="margin"></p>
-
-    <div class="flexrow">
-        <img src="./flashdrive_nocolor.png" alt="CAD flash drive" width="80%">
-        <img src="./flashdrive.jpeg" alt="Flash drive comparison" width="80%">
+<div class="image-row">
+        <img src="Adaptor_inputs.png" alt="USB adaptor inputs";>
+        <img src="Adaptor_input_cuts.png" alt="USB adaptor input cuts";>
     </div>
+    <p class="caption">Input-side sketch and remove extrusion.</p>
 
-    <p class="caption">
-        CAD model before colouring and comparison with the real object.
-    </p>
-
-    <p class="margin"></p>
-
-    <p class="page-writing"
-        For my second model, I chose a metal nut from the lab. At first it seemed simple: sketch a hexagon, extrude, cut a hole, and add threads.
-    </p>
-
-    <p class="margin"></p>
-
-    <div class="flexrow">
-        <img src="./nut_params.png" alt="Nut parameters">
-    </div>
-
-    <p class="caption">
-        The measured parameters for the nut.
-    </p>
-
-    <p class="page-writing"
-        The bevelled edges caused unexpected issues. After experimentation and tutorials, I used an extrude taper angle to recreate the shape. The threading was also tricky due to standardised sizes in Fusion, so I selected the closest match.
-    </p>
-
-    <p class="margin"></p>
-
-    <div class="flexrow">
-        <img src="./nut.png" alt="CAD nut model" width="60%">
-        <img src="./nut_w_nut.jpeg" alt="Nut comparison">
-    </div>
-
-    <p class="caption">
-        Final CAD nut model compared to the real nut.
-    </p>
+<p>
+    I then moved onto the input side of the hub. I looked up the dimensions for USB-A, C, HDMI, and headphone jacks, and measured the distances between
+    key points on the hub using calipers. Given these are cut into the hub, I did a blind remove extrude of 18mm through the main body.
+</p>
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
